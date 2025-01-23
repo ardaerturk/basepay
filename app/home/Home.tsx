@@ -64,6 +64,26 @@ export default function Home() {
 
 	if (showPreloader) return <Preloader isLoading={showPreloader} />;
 
+
+	useEffect(() => {
+		if (window.ethereum) {
+		  console.log('Provider check:', {
+			isIntersend: window.ethereum.isIntersend,
+			provider: window.ethereum
+		  });
+	  
+		  // Test request
+		  window.ethereum.request({ method: 'eth_accounts' })
+		  //@ts-ignore
+			.then(accounts => console.log('Accounts:', accounts))
+					  //@ts-ignore
+			.catch(err => console.error('Error:', err));
+		}
+	  }, []);
+
+
+
+
 	return (
 		<div className="min-h-screen content-center bg-white p-4 overflow-hidden">
 			<AnimatedContainer className="relative space-y-6 max-w-2xl px-4 mx-auto aspect-square content-center sm:border sm:border-border-light sm:rounded-full">
